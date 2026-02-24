@@ -1,0 +1,30 @@
+[
+  {
+    "id": "mlgyzst4i76no",
+    "name": "Test User",
+    "email": "test@test.com",
+    "password": "test123",
+    "createdAt": "2026-02-10T19:04:35.224Z"
+  },
+  {
+    "id": "mlh02789k6g4l",
+    "name": "test",
+    "email": "test@test1.com",
+    "password": "test12",
+    "createdAt": "2026-02-10T19:34:26.841Z"
+  },
+  {
+    "id": "mlizchhshmeir",
+    "name": "test",
+    "email": "xyz@abc",
+    "password": "123456",
+    "createdAt": "2026-02-12T04:49:59.440Z"
+  },
+  {
+    "id": "mlizmfn2m8zvz",
+    "name": "test123",
+    "email": "wtf@anc.com",
+    "password": "123456",
+    "createdAt": "2026-02-12T04:57:43.598Z"
+  }
+]

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JobFinder AI — Smart Resume Matching</title>
+  <meta name="description" content="Upload your resume and find the most relevant jobs using AI-powered semantic search">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ======= NAV ======= -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="logo" onclick="showSection('hero')">
+        <span class="logo-icon">⚡</span>
+        <span>Job<span class="accent">Finder</span> AI</span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#" onclick="showSection('hero')">Home</a>
+        <a href="#" onclick="showSection('upload')" id="navUpload">Find Jobs</a>
+      </div>
+      <div class="nav-auth" id="navAuth">
+        <button class="btn-ghost" onclick="showSection('login')">Log In</button>
+        <button class="btn-primary-sm" onclick="showSection('signup')">Sign Up</button>
+      </div>
+      <div class="nav-user" id="navUser" style="display:none;">
+        <span class="user-greeting" id="userGreeting"></span>
+        <button class="btn-ghost" onclick="logout()">Log Out</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ======= HERO SECTION ======= -->
+  <section id="hero" class="section active">
+    <div class="hero-bg">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">🔥 AI-Powered Job Matching</div>
+      <h1>Find Your <span class="gradient-text">Dream Job</span> in Seconds</h1>
+      <p class="hero-sub">Upload your resume and our AI analyzes your skills, experience, and expertise to match you with the most relevant opportunities from 50+ listings.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="handleGetStarted()" id="heroBtn">
+          <span>Get Started</span>
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="btn-outline" onclick="showSection('upload')">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m4-5 5-5 5 5m-5-5v12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Upload Resume</span>
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num" data-count="50">0</span>
+          <span class="stat-label">Job Listings</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num" data-count="15">0</span>
+          <span class="stat-label">Industries</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num" data-count="98">0</span>
+          <span class="stat-label">% Match Accuracy</span>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll to explore</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ======= AUTH: LOGIN ======= -->
+  <section id="login" class="section">
+    <div class="auth-container">
+      <div class="auth-card glass-card">
+        <div class="auth-header">
+          <h2>Welcome Back</h2>
+          <p>Log in to your account to find jobs</p>
+        </div>
+        <form id="loginForm" onsubmit="handleLogin(event)">
+          <div class="input-group">
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" placeholder="you@example.com" required>
+          </div>
+          <div class="input-group">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn-primary full-w" id="loginBtn">
+            <span>Log In</span>
+          </button>
+          <div class="auth-error" id="loginError"></div>
+        </form>
+        <p class="auth-switch">Don't have an account? <a href="#" onclick="showSection('signup')">Sign Up</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= AUTH: SIGNUP ======= -->
+  <section id="signup" class="section">
+    <div class="auth-container">
+      <div class="auth-card glass-card">
+        <div class="auth-header">
+          <h2>Create Account</h2>
+          <p>Sign up to start finding your dream job</p>
+        </div>
+        <form id="signupForm" onsubmit="handleSignup(event)">
+          <div class="input-group">
+            <label for="signupName">Full Name</label>
+            <input type="text" id="signupName" placeholder="John Doe" required>
+          </div>
+          <div class="input-group">
+            <label for="signupEmail">Email</label>
+            <input type="email" id="signupEmail" placeholder="you@example.com" required>
+          </div>
+          <div class="input-group">
+            <label for="signupPassword">Password</label>
+            <input type="password" id="signupPassword" placeholder="Minimum 6 characters" minlength="6" required>
+          </div>
+          <button type="submit" class="btn-primary full-w" id="signupBtn">
+            <span>Create Account</span>
+          </button>
+          <div class="auth-error" id="signupError"></div>
+        </form>
+        <p class="auth-switch">Already have an account? <a href="#" onclick="showSection('login')">Log In</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= UPLOAD SECTION ======= -->
+  <section id="upload" class="section">
+    <div class="upload-container">
+      <div class="upload-header">
+        <h2>Upload Your <span class="gradient-text">Resume</span></h2>
+        <p>Drop your PDF resume below and let our AI find the best jobs for you</p>
+      </div>
+      <div class="dropzone" id="dropzone">
+        <div class="dropzone-content">
+          <div class="dropzone-icon">
+            <svg width="64" height="64" fill="none" viewBox="0 0 24 24">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="url(#uploadGrad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="17,8 12,3 7,8" stroke="url(#uploadGrad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="12" y1="3" x2="12" y2="15" stroke="url(#uploadGrad)" stroke-width="1.5" stroke-linecap="round"/>
+              <defs>
+                <linearGradient id="uploadGrad" x1="0" y1="0" x2="24" y2="24">
+                  <stop stop-color="#6366f1"/>
+                  <stop offset="1" stop-color="#a855f7"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h3>Drag & drop your resume here</h3>
+          <p>or click to browse files</p>
+          <span class="file-hint">PDF files only, up to 10MB</span>
+        </div>
+        <div class="dropzone-active-overlay">
+          <span>Drop it like it's hot 🔥</span>
+        </div>
+        <input type="file" id="fileInput" accept=".pdf" hidden>
+      </div>
+      <div class="file-info" id="fileInfo" style="display:none;">
+        <div class="file-badge">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke="#6366f1" stroke-width="2"/><path d="M14 2v6h6M16 13H8m8 4H8m2-8H8" stroke="#6366f1" stroke-width="2" stroke-linecap="round"/></svg>
+          <span id="fileName"></span>
+          <button class="remove-file" onclick="removeFile()">✕</button>
+        </div>
+      </div>
+      <button class="btn-primary" id="analyzeBtn" onclick="analyzeResume()" style="display:none;">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Analyze & Find Jobs</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ======= LOADING ======= -->
+  <section id="loading" class="section">
+    <div class="loading-container">
+      <div class="loader-ring">
+        <div class="loader-ring-inner"></div>
+      </div>
+      <h3>Analyzing your resume...</h3>
+      <p class="loading-step" id="loadingStep">Extracting text from PDF</p>
+      <div class="loading-bar">
+        <div class="loading-bar-fill" id="loadingBarFill"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= RESULTS SECTION ======= -->
+  <section id="results" class="section">
+    <div class="results-container">
+      <div class="results-header">
+        <h2>Your <span class="gradient-text">Job Matches</span></h2>
+        <p id="resultsSummary"></p>
+      </div>
+
+      <div class="skills-panel glass-card" id="skillsPanel">
+        <h3>🎯 Detected Skills</h3>
+        <div class="skills-tags" id="skillsTags"></div>
+      </div>
+
+      <div class="results-controls">
+        <div class="results-count" id="resultsCount"></div>
+        <div class="sort-group">
+          <label>Sort by:</label>
+          <select id="sortSelect" onchange="sortResults()">
+            <option value="relevance">Relevance</option>
+            <option value="salary">Salary</option>
+            <option value="recent">Most Recent</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="jobs-grid" id="jobsGrid"></div>
+
+      <button class="btn-outline" onclick="showSection('upload')" style="margin-top:2rem;">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m4-5 5-5 5 5m-5-5v12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Upload Another Resume</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ======= FOOTER ======= -->
+  <footer>
+    <div class="footer-inner">
+      <span class="logo"><span class="logo-icon">⚡</span> Job<span class="accent">Finder</span> AI</span>
+      <span class="footer-text">Semantic job matching powered by TF-IDF</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
