@@ -26,5 +26,12 @@
     "email": "wtf@anc.com",
     "password": "123456",
     "createdAt": "2026-02-12T04:57:43.598Z"
+  },
+  {
+    "id": "mnfi5soruhj28",
+    "name": "xyz",
+    "email": "xyz@gmail.com",
+    "password": "123456",
+    "createdAt": "2026-04-01T03:45:00.027Z"
   }
 ]

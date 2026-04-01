@@ -73,30 +73,20 @@ async function handleSignup(e) {
     btn.innerHTML = '<span>Creating account...</span>';
     btn.disabled = true;
 
-    try {
-        const res = await fetch(`${API}/api/signup`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, password })
-        });
-        const data = await res.json();
-
-        if (!res.ok) {
-            err.textContent = data.error || 'Signup failed';
-            return;
-        }
-
-        currentUser = data.user;
+    // Simulate network delay for pure local login bypass
+    setTimeout(() => {
+        currentUser = {
+            id: 'local_' + Date.now().toString(36),
+            name: name || 'Demo User',
+            email: email || 'demo@example.com'
+        };
         localStorage.setItem('jobfinder_user', JSON.stringify(currentUser));
         updateAuthUI();
         showSection('upload');
-
-    } catch (error) {
-        err.textContent = 'Network error. Please try again.';
-    } finally {
+        
         btn.innerHTML = '<span>Create Account</span>';
         btn.disabled = false;
-    }
+    }, 600);
 }
 
 async function handleLogin(e) {
@@ -111,30 +101,20 @@ async function handleLogin(e) {
     btn.innerHTML = '<span>Logging in...</span>';
     btn.disabled = true;
 
-    try {
-        const res = await fetch(`${API}/api/login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
-        });
-        const data = await res.json();
-
-        if (!res.ok) {
-            err.textContent = data.error || 'Login failed';
-            return;
-        }
-
-        currentUser = data.user;
+    // Simulate network delay for pure local login bypass
+    setTimeout(() => {
+        currentUser = {
+            id: 'local_' + Date.now().toString(36),
+            name: email.split('@')[0] || 'Demo User',
+            email: email || 'demo@example.com'
+        };
         localStorage.setItem('jobfinder_user', JSON.stringify(currentUser));
         updateAuthUI();
         showSection('upload');
-
-    } catch (error) {
-        err.textContent = 'Network error. Please try again.';
-    } finally {
+        
         btn.innerHTML = '<span>Log In</span>';
         btn.disabled = false;
-    }
+    }, 600);
 }
 
 function logout() {
@@ -314,6 +294,24 @@ function renderJobCards(jobs) {
             return `<span class="job-skill ${isMatched ? 'matched' : ''}">${s}</span>`;
         }).join('');
 
+        const missingSkills = job.skills.filter(s => 
+            !job.matchedSkills.some(ms => ms.toLowerCase() === s.toLowerCase())
+        );
+        
+        const coursesHtml = missingSkills.length > 0 ? `
+          <div class="suggested-courses">
+            <h4>Missing Skills - Suggested Courses</h4>
+            <div class="course-links">
+              ${missingSkills.map(s => `
+                <a href="https://www.youtube.com/results?search_query=${encodeURIComponent(s + ' full course tutorial')}" target="_blank" class="course-link">
+                  <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M21.582 6.186a2.6 2.6 0 0 0-1.83-1.83C18.14 3.9 12 3.9 12 3.9s-6.14 0-7.752.456a2.6 2.6 0 0 0-1.83 1.83C1.962 7.798 1.962 12 1.962 12s0 4.202.456 5.814a2.6 2.6 0 0 0 1.83 1.83C5.86 20.1 12 20.1 12 20.1s6.14 0 7.752-.456a2.6 2.6 0 0 0 1.83-1.83c.456-1.612.456-5.814.456-5.814s0-4.202-.456-5.814zM9.982 15.474V8.526L16.035 12l-6.053 3.474z"/></svg>
+                  ${s}
+                </a>
+              `).join('')}
+            </div>
+          </div>
+        ` : '';
+
         return `
       <div class="job-card" style="animation-delay: ${i * 0.05}s">
         <div class="job-card-top">
@@ -339,6 +337,7 @@ function renderJobCards(jobs) {
         </div>
         <div class="job-desc">${job.description}</div>
         <div class="job-skills">${skillsHtml}</div>
+        ${coursesHtml}
       </div>
     `;
     }).join('');

@@ -1050,3 +1050,48 @@ footer {
         justify-content: center;
     }
 }
+
+/* ========== SUGGESTED COURSES ========== */
+.suggested-courses {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.suggested-courses h4 {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.course-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.course-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 0, 0, 0.08);
+    color: #ff4e4e;
+    border: 1px solid rgba(255, 0, 0, 0.2);
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.course-link:hover {
+    background: rgba(255, 0, 0, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.15);
+}
+
+.course-link svg {
+    color: #ff0000;
+}
