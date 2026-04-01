@@ -11,7 +11,10 @@
 🟪🟪🟪🟪🟪🟪🟪🟪 <br>
 
 *Your AI-powered quest to find the ultimate job!*
-<br><br>
+<br>
+
+### [🎮 PLAY DEMO NOW 🎮](https://skill-sync-light.vercel.app/)
+<br>
 
 [![Retro Style](https://img.shields.io/badge/Style-Retro_Pixel-blueviolet?style=for-the-badge)](https://github.com)
 [![Engine](https://img.shields.io/badge/Engine-Node.js-green?style=for-the-badge)](https://nodejs.org)
